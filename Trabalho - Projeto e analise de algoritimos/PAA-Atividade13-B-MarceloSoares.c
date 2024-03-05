@@ -2,7 +2,7 @@
 #include<string.h>
 #define limite_max 5
 
-//QUESTOES 1 E 2 DO EXERCICIO FEITAS NAS LINHAS 58 E 72 RESPECTIVAMENTE
+//QUESTAO 1 DO EXERCICIO FEITo NA LINHA 72 
 
 struct tipoAluno
 {
@@ -13,22 +13,35 @@ struct tipoAluno
 };
 
 void cadastroAluno (struct tipoAluno alunos[], int *quantidade){
+    char nomeAux[10];    
     
-
     if (*quantidade < limite_max)
     {
         printf("Existem %d aluno(s) na lista\n\n", *quantidade);
 
         printf("Qual o nome do aluno: ");
-        scanf("%s", alunos->nome);
-       
+        scanf("%s", nomeAux);
+
+        if (*quantidade == 0)
+            strcpy(alunos[*quantidade].nome, nomeAux);
+        else
+            if (strcmp(alunos[*quantidade - 1].nome, nomeAux) == -1)
+                strcpy(alunos[*quantidade].nome, nomeAux);
+            else
+            {
+                printf("FAVOR INSEIR EM ORDEM ALFABETICA\n");
+                printf("O nome anterior: %s\n",alunos[*quantidade - 1].nome);
+                printf("---------------------------------\n\n");
+                return;
+            }
+                
         printf("Qual a nota 1 do aluno: ");
-        scanf("%f", &alunos->nota1);
+        scanf("%f", &alunos[*quantidade].nota1);
 
         printf("Qual a nota 2 do aluno: ");
-        scanf("%f", &alunos->nota2);
+        scanf("%f", &alunos[*quantidade].nota2);
 
-        alunos->media = (alunos->nota1 + alunos->nota2) /2;
+        alunos[*quantidade].media = (alunos[*quantidade].nota1 + alunos[*quantidade].nota2) /2;
         
 
         *quantidade += 1;
@@ -54,7 +67,7 @@ void mostrarAlunos(struct tipoAluno alunos[], int quantidade){
 
 }
 
-//QUETAO 1 DO EXERCICIO 
+
 int alunosAcimaMedia(struct tipoAluno alunos[], int quantidade, int media){
 
     int i, contador=0;
@@ -69,9 +82,9 @@ int alunosAcimaMedia(struct tipoAluno alunos[], int quantidade, int media){
     return contador;
 }
 
-//QUETAO 2 DO EXERCICIO 
-int buscarAluno(struct tipoAluno alunos[], int final, char nome[]){
-    int inicio=0, meio;
+//QUETAO 1 DO EXERCICIO (BUSCA BINARIA RECURSIVA)
+int buscarAluno(struct tipoAluno alunos[], int inicio, int final, char nome[]){
+    int meio;
     
     while (inicio <= final)
     {
@@ -79,10 +92,14 @@ int buscarAluno(struct tipoAluno alunos[], int final, char nome[]){
         if (strcmp(nome, alunos[meio].nome) == 0)
             return meio;
         else
-            if (strcmp(nome, alunos[meio].nome) == -1)
+            if (strcmp(nome, alunos[meio].nome) == -1){
                 final = meio - 1;
-            else
+                return buscarAluno(alunos, inicio, final, nome);
+            }
+            else {
                 inicio = meio + 1;
+                return buscarAluno(alunos, inicio, final, nome);
+            }
     }
 
     return -1;
@@ -104,7 +121,7 @@ int main(){
         case 1:
             system("cls");
             printf("--------Cadastro alunos------- \n");
-            cadastroAluno(&alunos[quantidadeAlunos], &quantidadeAlunos);
+            cadastroAluno(alunos, &quantidadeAlunos);
             break;
 
         case 2:
@@ -129,10 +146,11 @@ int main(){
             printf("Digite o nome a ser procurado: ");
             scanf("%s", nome);
 
-            if (buscarAluno(alunos, quantidadeAlunos, nome) == -1)
+            int inicio = 0;
+            if (buscarAluno(alunos, inicio, quantidadeAlunos, nome) == -1)
                 printf("O aluno NAO esta presente na lista");
             else
-                printf("O aluno se encontra na lista, na posicao %d do vetor\n\n", buscarAluno(alunos, quantidadeAlunos, nome));
+                printf("O aluno se encontra na lista, na posicao %d do vetor\n\n", buscarAluno(alunos, inicio, quantidadeAlunos, nome));
             
             printf("\n---------------------\n\n");
             break;
