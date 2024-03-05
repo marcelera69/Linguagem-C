@@ -1,3 +1,4 @@
+# Linguagem-C
 OBS: Basta colocar os dois arquvios na mesma pasta
 
 Faça um algoritmo (na Linguagem C) que leia o arquivo Notas.txt contendo as notas de n alunos (uma
