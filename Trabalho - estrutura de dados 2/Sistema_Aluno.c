@@ -114,19 +114,46 @@ void removeUltimo (TipoAluno **listaAlunos){
 int main(){
 
     TipoAluno *listaAlunos = NULL;
-    
+    int opcoes;
 
-    addAlunoFim(&listaAlunos, "Marcelo Soares", 20, 7.9);
-    addAlunoFim(&listaAlunos, "Luan Maia", 21, 6.1);
+    do
+    {
+        printf("1-Adicionar um aluno no inicio \n2-Adicionar um aluno no fim \n2-Mostrar alunos \n4-Remover o ultimo aluno");
+        printf("\nEscolha uma opcao: ");
+        scanf("%d", &opcoes);
+        switch (opcoes)
+        {
+        case 1:
+            system("cls");
+            printf("*** Opcao 1 escolhida ***\n\n");
+            break;
 
-    printf("Primeira lista:\n");
-    mostrarAlunos(&listaAlunos);
+        case 2:
+            system("cls");
+            printf("*** Opcao 2 escolhida ***\n\n");
+            break;
 
-    addAlunoInicio(&listaAlunos, "Jandrei Jesus", 22, 4.5);
-    printf("\n\nSegunda lista lista:\n\n");
-    mostrarAlunos(&listaAlunos);
+        case 3:
+            system("cls");
+            printf("*** Opcao 3 escolhida ***\n\n");
+            break;
 
+        case 4:
+            system("cls");
+            printf("*** Opcao 4 escolhida ***\n\n");
+            break;
 
+        case 5:
+            system("cls");
+            printf("*** Opcao 5 escolhida ***\n\n");
+            break;
+        
+        default:
+        system("cls");
+        printf("***Digite uma opcao valida !!!***\n\n");
+            break;
+        }
+    } while (opcoes != 5);
     
     return 0;
 }
