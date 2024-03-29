@@ -111,6 +111,20 @@ void removeUltimo (TipoAluno **listaAlunos){
     }
 }
 
+void adicionarAluno(){
+    int idade;
+    float media;
+    char nome[50];
+
+    printf("Digite com o nome do aluno: ");
+    scanf("%s", nome);
+    printf("Digite com o nome do aluno: ");
+    scanf("%d", &idade);
+    printf("Digite com o nome do aluno: ");
+    scanf("%s", nome);
+    
+    
+}
 
 int main(){
 
@@ -119,7 +133,7 @@ int main(){
 
     do
     {
-        printf("1-Adicionar um aluno no inicio \n2-Adicionar um aluno no fim \n2-Mostrar alunos \n4-Remover o ultimo aluno");
+        printf("1-Adicionar um aluno no inicio \n2-Adicionar um aluno no fim \n2-Mostrar alunos \n4-Remover o ultimo aluno \n5-Sair do aplicativo");
         printf("\nEscolha uma opcao: ");
         scanf("%d", &opcoes);
         switch (opcoes)
@@ -127,6 +141,7 @@ int main(){
         case 1:
             system("cls");
             printf("*** Opcao 1 escolhida ***\n\n");
+            adicionarAluno();
             break;
 
         case 2:
@@ -146,7 +161,7 @@ int main(){
 
         case 5:
             system("cls");
-            printf("*** Opcao 5 escolhida ***\n\n");
+            printf("*** App finalizado ***\n\n");
             break;
         
         default:
