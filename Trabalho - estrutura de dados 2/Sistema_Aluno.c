@@ -10,6 +10,8 @@ typedef struct aluno{
     struct aluno *prox;
 } TipoAluno;
 
+TipoAluno *listaAlunos = NULL;
+
 TipoAluno* aloca_aluno(){
 
     TipoAluno *novo_aluno = (TipoAluno*)malloc(sizeof(TipoAluno));
@@ -34,15 +36,15 @@ TipoAluno* CriarNovoAluno (char nome[], int idade, float media){
     return novoAluno;
 }
 
-void addAlunoFim(TipoAluno **listaAlunos, char nome[], int idade, float media){
+void addAlunoFim(char nome[], int idade, float media){
 
     TipoAluno *novoAluno = CriarNovoAluno(nome, idade, media);
 
-    if (*listaAlunos == NULL)
-        *listaAlunos = novoAluno;
+    if (listaAlunos == NULL)
+        listaAlunos = novoAluno;
     else{
 
-        TipoAluno* atual = *listaAlunos;
+        TipoAluno* atual = listaAlunos;
 
         while (atual->prox != NULL){
             atual = atual->prox;
@@ -53,19 +55,19 @@ void addAlunoFim(TipoAluno **listaAlunos, char nome[], int idade, float media){
     
 }
 
-void addAlunoInicio(TipoAluno **listaAlunos, char nome[], int idade, float media){
+void addAlunoInicio(char nome[], int idade, float media){
     
     TipoAluno *novoAluno = CriarNovoAluno(nome, idade, media);
     TipoAluno *aux = aloca_aluno();
 
-    aux = *listaAlunos;
-    *listaAlunos = novoAluno;
+    aux = listaAlunos;
+    listaAlunos = novoAluno;
     novoAluno->prox = aux;
 }
 
-void mostrarAlunos(TipoAluno **listaAlunos){
+void mostrarAlunos(){
     int contador=0;
-    TipoAluno *atual = *listaAlunos;
+    TipoAluno *atual = listaAlunos;
 
     if (atual == NULL)
         printf("LISTA VAZIA!!!");
@@ -80,19 +82,19 @@ void mostrarAlunos(TipoAluno **listaAlunos){
     
 }
 
-void removeUltimo (TipoAluno **listaAlunos){
+void removeUltimo (){
     TipoAluno *atual = aloca_aluno();
     TipoAluno *anterior = aloca_aluno();
     
-    atual = *listaAlunos;
-    anterior = *listaAlunos;
+    atual = listaAlunos;
+    anterior = listaAlunos;
 
     if(atual == NULL){
         printf("LISTA VAZIA!!!");
     }
     else{
         if (atual->prox == NULL)
-            *listaAlunos = NULL;
+            listaAlunos = NULL;
         else{
 
             atual = atual->prox;
@@ -111,6 +113,8 @@ void removeUltimo (TipoAluno **listaAlunos){
     }
 }
 
+
+
 void adicionarAluno(){
     int idade;
     float media;
@@ -123,11 +127,11 @@ void adicionarAluno(){
     printf("Digite com o nome do aluno: ");
     scanf("%f", &media);
     
+
 }
 
 int main(){
 
-    TipoAluno *listaAlunos = NULL;
     int opcoes;
 
     do
