@@ -22,14 +22,21 @@ TipoAluno* aloca_aluno(){
     return novo_aluno;
 }
 
-void addAlunoFim(TipoAluno **listaAlunos, char nome[], int idade, float media){
+TipoAluno* CriarNovoAluno (char nome[], int idade, float media){
 
     TipoAluno *novoAluno = aloca_aluno();
-
+    
     strcpy(novoAluno->nome, nome);
     novoAluno->idade = idade;
     novoAluno->media = media;
     novoAluno->prox = NULL;
+
+    return novoAluno;
+}
+
+void addAlunoFim(TipoAluno **listaAlunos, char nome[], int idade, float media){
+
+    TipoAluno *novoAluno = CriarNovoAluno(nome, idade, media);
 
     if (*listaAlunos == NULL)
         *listaAlunos = novoAluno;
@@ -48,14 +55,8 @@ void addAlunoFim(TipoAluno **listaAlunos, char nome[], int idade, float media){
 
 void addAlunoInicio(TipoAluno **listaAlunos, char nome[], int idade, float media){
     
+    TipoAluno *novoAluno = CriarNovoAluno(nome, idade, media);
     TipoAluno *aux = aloca_aluno();
-    TipoAluno *novoAluno = aloca_aluno();
-
-
-    strcpy(novoAluno->nome, nome);
-    novoAluno->idade = idade;
-    novoAluno->media = media;
-    novoAluno->prox = NULL;
 
     aux = *listaAlunos;
     *listaAlunos = novoAluno;
