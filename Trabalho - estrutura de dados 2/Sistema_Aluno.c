@@ -121,8 +121,7 @@ void adicionarAluno(){
     printf("Digite com o nome do aluno: ");
     scanf("%d", &idade);
     printf("Digite com o nome do aluno: ");
-    scanf("%s", nome);
-    
+    scanf("%f", &media);
     
 }
 
@@ -156,12 +155,7 @@ int main(){
 
         case 4:
             system("cls");
-            printf("*** Opcao 4 escolhida ***\n\n");
-            break;
-
-        case 5:
-            system("cls");
-            printf("*** App finalizado ***\n\n");
+            printf("*** Fim do aplicativo ***\n\n");
             break;
         
         default:
@@ -169,7 +163,7 @@ int main(){
         printf("***Digite uma opcao valida !!!***\n\n");
             break;
         }
-    } while (opcoes != 5);
+    } while (opcoes != 4);
     
     return 0;
 }
