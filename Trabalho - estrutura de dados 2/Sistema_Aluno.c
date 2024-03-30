@@ -113,21 +113,35 @@ void removeUltimo (){
     }
 }
 
+void escolherAddFimOuInicio(char nome[50], int idade, float media){
+    char controle;
 
+    printf("Digite 'i' para adicionar no inicio ou 'f' para adicionar no fim: ");
+    scanf("%c", &controle);
+    if (controle == "i")
+        addAlunoInicio(nome, idade, media);
+    else if (controle == "f")
+        addAlunoFim(nome, idade, media);
+        else{
+            printf("Digite um caracter valido!!!\n");
+            escolherAddFimOuInicio(nome, idade, media);
+        }
+}
 
 void adicionarAluno(){
     int idade;
     float media;
     char nome[50];
-
-    printf("Digite com o nome do aluno: ");
+    
+    printf("Digite o nome do aluno: ");
     scanf("%s", nome);
-    printf("Digite com o nome do aluno: ");
+    printf("Digite a idade dele: ");
     scanf("%d", &idade);
-    printf("Digite com o nome do aluno: ");
+    printf("Digite a nota do mesmo: ");
     scanf("%f", &media);
     
-
+    escolherAddFimOuInicio(nome, idade, media);
+    system("cls");
 }
 
 int main(){
@@ -136,7 +150,7 @@ int main(){
 
     do
     {
-        printf("1-Adicionar um aluno no inicio \n2-Adicionar um aluno no fim \n2-Mostrar alunos \n4-Remover o ultimo aluno \n5-Sair do aplicativo");
+        printf("1-Adicionar um aluno na lista \n2-Mostrar alunos \n3-Remover o ultimo aluno \n4-Sair do aplicativo");
         printf("\nEscolha uma opcao: ");
         scanf("%d", &opcoes);
         switch (opcoes)
