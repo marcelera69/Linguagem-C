@@ -76,6 +76,7 @@ void mostrarAlunos(TipoAluno **listaAlunos){
             printf("  ->  Aluno %d: %s, idade: %d, nota: %.1f", contador, atual->nome, atual->idade, atual->media);
             atual = atual->prox;
         }
+        printf("\n\n");
     }
     
 }
@@ -88,7 +89,7 @@ void removeUltimo (TipoAluno **listaAlunos){
     anterior = *listaAlunos;
 
     if(atual == NULL){
-        printf("LISTA VAZIA!!!");
+        printf("LISTA VAZIA!!!\n\n");
     }
     else{
         if (atual->prox == NULL)
@@ -109,17 +110,20 @@ void removeUltimo (TipoAluno **listaAlunos){
             }
         }
     }
+    printf("Aluno removido da fila com sucesso!\n\n");
 }
 
 
 int main(){
 
     TipoAluno *listaAlunos = NULL;
-    int opcoes;
-
+    int opcoes, controle;
+    char nome[50];
+    int idade;
+    float mediaNota;
     do
     {
-        printf("1-Adicionar um aluno no inicio \n2-Adicionar um aluno no fim \n2-Mostrar alunos \n4-Remover o ultimo aluno");
+        printf("1-Adicionar um aluno \n2-Mostrar alunos \n3-Remover o ultimo aluno");
         printf("\nEscolha uma opcao: ");
         scanf("%d", &opcoes);
         switch (opcoes)
@@ -127,26 +131,53 @@ int main(){
         case 1:
             system("cls");
             printf("*** Opcao 1 escolhida ***\n\n");
+            printf("Digite o nome: ");
+            scanf("%s", nome);
+            system("cls");
+            printf("Digite a idade: ");
+            scanf("%d", &idade);
+            system("cls");
+            printf("Entre com a media: ");
+            scanf("%f", &mediaNota);
+            system("cls");
+
+            if (listaAlunos == NULL){
+                 addAlunoFim(&listaAlunos, nome, idade, mediaNota);
+                 printf("Primeiro aluno adicionado com sucesso!\n");
+                 break;
+            }
+
+            printf("Deseja adicionar no inicio ou no fim da lista ? (1-Inicio / 2-Fim): ");
+            scanf("%d", &controle);
+
+            while (controle == 1 || controle == 2) {
+                if (controle == 1) {
+                    addAlunoInicio(&listaAlunos, nome, idade, mediaNota);
+                    controle = 0;
+                    printf("Aluno adicionado no FIM da fila com sucesso!\n\n");
+                } else {
+                    if (controle == 2) {
+                        addAlunoFim(&listaAlunos, nome, idade, mediaNota);
+                        controle = 0;
+                        printf("Aluno adicionado no INICIO da fila com sucesso!\n\n");
+                    } else {
+                        printf("DIGITE UM NÚMERO VÁLIDO!!!\n\n");
+                    }
+                }
+            }
             break;
 
         case 2:
             system("cls");
             printf("*** Opcao 2 escolhida ***\n\n");
+            mostrarAlunos(&listaAlunos);
             break;
 
         case 3:
             system("cls");
             printf("*** Opcao 3 escolhida ***\n\n");
-            break;
-
-        case 4:
-            system("cls");
-            printf("*** Opcao 4 escolhida ***\n\n");
-            break;
-
-        case 5:
-            system("cls");
-            printf("*** Opcao 5 escolhida ***\n\n");
+            removeUltimo(&listaAlunos);
+            mostrarAlunos(&listaAlunos);
             break;
         
         default:
